@@ -28,7 +28,28 @@ class Tree
         end
     end
 end
-
+def insert(value)
+    current = @root
+        while current.get_left!=nil && current.get_right!=nil
+           if value > current.get_data
+            current = current.get_right
+            else
+                current = current.get_left
+            end
+        end
+        while  current.get_right!=nil && value>=current.get_data
+            current = current.get_right
+        end
+        while current.get_left!=nil && value<current.get_data
+           current = current.get_left
+        end 
+        if value > current.get_data
+        current.set_right(Node.new(value))
+        else
+            current.set_left(Node.new(value))
+        end
+   
+end
     def pretty_print(node = @root, prefix = '', is_left = true)
         pretty_print(node.get_right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.get_right
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.get_data}"
